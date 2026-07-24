@@ -1,6 +1,7 @@
 // We used the `<=` comparison to make the algorithm robust.
 #include <cstddef>
 #include <iostream>
+#include <vector>
 
 template< typename T >
 void Merge(T* arr, std::ptrdiff_t left, std::ptrdiff_t mid, std::ptrdiff_t right)
