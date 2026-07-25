@@ -104,4 +104,5 @@ class Heap
 		heap.push_back(elem);
 		sift_up(heap.size() - 1);
 	}
+	size_t get_size() { return heap.size(); }
 };
