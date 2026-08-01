@@ -2,7 +2,6 @@
 #include <vector>
 
 template< typename T >
-
 class Queue
 {
   private:
@@ -20,8 +19,10 @@ class Queue
   public:
 	Queue() : head(nullptr), tail(nullptr), size(0) {}
 	~Queue() { clear(); }
+
 	bool empty() const { return head == nullptr; }
 	size_t get_size() const { return size; }
+
 	void push(const T& value)
 	{
 		Node* temp = new Node(value);
@@ -29,15 +30,15 @@ class Queue
 		{
 			head = temp;
 			tail = temp;
-			size++;
 		}
 		else
 		{
 			tail->next = temp;
 			tail = temp;
-			size++;
 		}
+		size++;
 	}
+
 	void pop()
 	{
 		if (empty())
@@ -53,6 +54,7 @@ class Queue
 			tail = nullptr;
 		}
 	}
+
 	bool top(T& out_value) const
 	{
 		if (empty())
@@ -62,6 +64,7 @@ class Queue
 		out_value = head->data;
 		return true;
 	}
+
 	void clear()
 	{
 		while (!empty())
