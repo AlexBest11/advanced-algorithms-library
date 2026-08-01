@@ -19,8 +19,9 @@ void counting_sort(T* arr, std::ptrdiff_t len)
 		count[i] += count[i - 1];
 	}
 	std::vector< T > cnt(len);
-	for (std::ptrdiff_t i = len - 1; i >= 0; i--)
+	for (std::ptrdiff_t i = len; i > 0;)
 	{
+		--i;
 		std::ptrdiff_t count_idx = arr[i] - min;
 		count[count_idx] -= 1;
 		cnt[count[count_idx]] = arr[i];

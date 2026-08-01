@@ -1,4 +1,4 @@
-#include "data_structures/heap.hpp"
+#include "algorithms/data_structures/heap.hpp"
 
 #include <iostream>
 #include <vector>
@@ -12,7 +12,7 @@ std::vector< T > Heap_Sort(std::vector< T > &data)
 	}
 	Heap< T > heap(std::move(data), 1);
 	std::vector< T > data_;
-	size_t size = heap.get_size();
+	size_t size = heap.heap_get_size();
 	for (size_t i = 0; i < size; i++)
 	{
 		data_.push_back(heap.pop());
