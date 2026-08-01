@@ -87,7 +87,7 @@ class Heap
 
 	const T& top() const { return heap[0]; }
 
-	T pop()
+	T top()
 	{
 		T top = heap[0];
 		heap[0] = heap[heap.size() - 1];
@@ -102,6 +102,11 @@ class Heap
 	void push(const T& elem)
 	{
 		heap.push_back(elem);
+		sift_up(heap.size() - 1);
+	}
+	void push(T&& elem)
+	{
+		heap.push_back(std::move(elem));
 		sift_up(heap.size() - 1);
 	}
 	size_t get_size() { return heap.size(); }
