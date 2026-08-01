@@ -6,7 +6,7 @@
 template< typename T >
 void Merge(T* arr, std::ptrdiff_t left, std::ptrdiff_t mid, std::ptrdiff_t right)
 {
-	std::vector< T > arr_tmp(right - left + 1);
+	std::vector< T > arr_tmp(static_cast< std::ptrdiff_t >(right - left + 1));
 	std::ptrdiff_t i = left;
 	std::ptrdiff_t j = mid + 1;
 	std::ptrdiff_t k = 0;
@@ -37,9 +37,9 @@ void Merge(T* arr, std::ptrdiff_t left, std::ptrdiff_t mid, std::ptrdiff_t right
 		k++;
 		j++;
 	}
-	for (std::ptrdiff_t i = left; i <= right; i++)
+	for (std::ptrdiff_t idx = left; idx <= right; idx++)
 	{
-		arr[i] = arr_tmp[i - left];
+		arr[idx] = arr_tmp[idx - left];
 	}
 }
 

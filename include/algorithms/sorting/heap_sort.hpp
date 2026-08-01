@@ -12,8 +12,8 @@ std::vector< T > Heap_Sort(std::vector< T > &data)
 	}
 	Heap< T > heap(std::move(data), 1);
 	std::vector< T > data_;
-	size_t size = heap.heap_get_size();
-	for (size_t i = 0; i < size; i++)
+
+	while (heap.heap_get_size() > 0)
 	{
 		data_.push_back(heap.pop());
 	}
