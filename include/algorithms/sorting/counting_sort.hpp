@@ -4,8 +4,12 @@
 #include <vector>
 
 template< typename T >
-void counting_sort(T* arr, std::ptrdiff_t len)
+void Counting_Sort(T* arr, std::ptrdiff_t len)
 {
+	if (len <= 0)
+	{
+		return;
+	}
 	T max = *(std::max_element(arr, arr + len));
 	T min = *(std::min_element(arr, arr + len));
 	std::vector< T > count(max - min + 1);
@@ -13,7 +17,6 @@ void counting_sort(T* arr, std::ptrdiff_t len)
 	{
 		count[arr[i] - min] += 1;
 	}
-	std::ptrdiff_t k = 0;
 	for (std::ptrdiff_t i = 1; i < max - min + 1; i++)
 	{
 		count[i] += count[i - 1];

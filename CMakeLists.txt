@@ -3,13 +3,14 @@ if(POLICY CMP0135)
     cmake_policy(SET CMP0135 NEW)
 endif()
 project(advanced-algorithms-library CXX)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Устанавливаем стандарт C++17
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Указываем путь к заголовочным файлам проекта
-include_directories(${CMAKE_SOURCE_DIR}/include/algorithms)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
 # Автоматически скачиваем и подключаем Google Test
 include(FetchContent)
@@ -24,7 +25,7 @@ enable_testing()
 
 # --- СБОРКА ТЕСТОВ ---
 add_executable(algo_tests
-    tests/sorting/merge_sort_test.cpp
+    tests/sorting/sortings_test.cpp
 )
 
 # Подключаем фреймворк и готовую точку входа main()
