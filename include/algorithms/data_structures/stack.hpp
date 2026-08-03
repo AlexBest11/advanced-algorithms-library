@@ -9,6 +9,7 @@ class Stack
 	std::vector< T > s;
 
   public:
+	Stack() = default;
 	void push(const T &value) { s.push_back(value); }
 	void push(T &&value) { s.push_back(std::move(value)); }
 	void pop()
