@@ -1,41 +1,16 @@
+#include <cstddef>
+#include <functional>
 #include <iostream>
 #include <utility>
 #include <vector>
 
-// 0 - maxHeap
-// 1 - minHeap
-// in method compare: operator >
-template< typename T >
-class Heap
+template< typename T, typename Compare = std::less< T > >
+class PriorityQueue
 {
   private:
 	std::vector< T > heap;
-	bool which;
-	bool compare(size_t i, size_t j)
-	{
-		if (which == 0)
-		{
-			return heap[i] > heap[j];
-		}
-		else
-		{
-			return heap[i] < heap[j];
-		}
-	}
-
-  public:
-	Heap(std::vector< T > data, bool wh)
-	{
-		heap = std::move(data);
-		which = wh;
-		if (!heap.empty())
-		{
-			for (std::ptrdiff_t i = heap.size() / 2; i > 0; i--)
-			{
-				sift_down(i - 1);
-			}
-		}
-	}
+	Compare comp;
+	bool compare(size_t i, size_t j) { return comp(heap[j], heap[i]); }
 
 	void sift_down(size_t idx)
 	{
@@ -85,6 +60,20 @@ class Heap
 		}
 	}
 
+  public:
+	PriorityQueue() = default;
+
+	explicit PriorityQueue(std::vector< T > data, Compare c = Compare()) : heap(std::move(data)), comp(c)
+	{
+		if (!heap.empty())
+		{
+			for (std::ptrdiff_t i = heap.size() / 2; i > 0; i--)
+			{
+				sift_down(i - 1);
+			}
+		}
+	}
+
 	const T& top() const { return heap[0]; }
 
 	T pop()
@@ -110,4 +99,5 @@ class Heap
 		sift_up(heap.size() - 1);
 	}
 	size_t get_size() const { return heap.size(); }
+	bool empty() const { return heap.empty(); }
 };
