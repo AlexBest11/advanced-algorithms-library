@@ -6,19 +6,36 @@
 #include <iostream>
 #include <vector>
 
-
 bool bfs(std::vector< std::vector< int > >& residual_graph, int v, int sink, std::vector< int >& parent, std::vector< int >& visited)
 {
 	visited[v] = 1;
-	if (v == sink)
+	parent[v] = -1;
+	Queue< int > q;
+	q.push(v);
+	while (!q.empty())
 	{
-		return true;
+		int vert;
+		q.top(vert);
+		q.pop();
+		if (vert == sink)
+		{
+			return true;
+		}
+		for (int i = 0; i < residual_graph.size(); i++)
+		{
+			if (!visited[i] && residual_graph[vert][i] > 0)
+			{
+				q.push(i);
+				visited[i] = 1;
+				parent[i] = vert;
+			}
+		}
 	}
 
 	return false;
 }
 
-int Ford_Falkerson(std::vector< std::vector< int > >& graph, int source, int sink)
+int Edmons_Karp(std::vector< std::vector< int > >& graph, int source, int sink)
 {
 	std::vector< std::vector< int > > residual_graph = graph;
 	int size = graph.size();
@@ -26,7 +43,7 @@ int Ford_Falkerson(std::vector< std::vector< int > >& graph, int source, int sin
 	int max_flow = 0;
 	std::vector< int > visited(size, 0);
 
-	while (dfs(residual_graph, source, sink, parent, visited))
+	while (bfs(residual_graph, source, sink, parent, visited))
 	{
 		int path_flow = INT_MAX;
 		for (int v = sink; v != source;)
